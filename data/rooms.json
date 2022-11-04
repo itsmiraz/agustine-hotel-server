@@ -1,0 +1,113 @@
+[
+    {
+        "_id": "0282e032e5asdfas8a5c404fbd15261f11c2ab6a",
+        "rating": {
+            "number": 4.5,
+            "badge": "Excellent"
+        },
+        "price": 99,
+        "pepople": "1-3",
+        "status": true,
+        "title": "Luxury Room",
+        "image_url": "https://media.istockphoto.com/photos/3d-rendering-beautiful-luxury-bedroom-suite-in-hotel-with-tv-picture-id1066999762?k=20&m=1066999762&s=612x612&w=0&h=BitPXyhBFZQHMfpC9ikX_DReVK6Rd28hH9pRoZW8YAs=",
+        "details": "This is Really a Nice Room.It has AC personal pool and all the mordern facilites "
+    },
+    {
+        "_id": "0282e120e58a5cfasdfasdf404fbd15261f11c2ab6a",
+        "rating": {
+            "number": 4.5,
+            "badge": "Excellent"
+        },
+        "price": 120,
+        "pepople": "1-3",
+        "status": true,
+        "title": "Luxury Room",
+        "image_url": "https://www.gannett-cdn.com/-mm-/05b227ad5b8ad4e9dcb53af4f31d7fbdb7fa901b/c=0-64-2119-1259/local/-/media/USATODAY/USATODAY/2014/08/13/1407953244000-177513283.jpg",
+        "details": "This is Really a Nice Room.It has AC personal pool and all the mordern facilites "
+    },
+    {
+        "_id": "0282e0e5fa314sdfasdf8a5c404fbd15261f11c2ab6a",
+        "rating": {
+            "number": 4.5,
+            "badge": "Excellent"
+        },
+        "price": 130,
+        "pepople": "1-4",
+        "status": true,
+        "title": "Luxury Room",
+        "image_url": "https://static01.nyt.com/images/2019/03/24/travel/24trending-shophotels1/24trending-shophotels1-superJumbo.jpg",
+        "details": "This is Really a Nice Room.It has AC personal pool and all the mordern facilites "
+    },
+    {
+        "_id": "0282e0e5fasdfasdf8a5c404fbd15263131f11c2ab6a",
+        "rating": {
+            "number": 4.5,
+            "badge": "Excellent"
+        },
+        "price": 70,
+        "title": "Luxury Room",
+        "pepople": "1-3",
+        "image_url": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8aG90ZWwlMjByb29tfGVufDB8fDB8fA%3D%3D&w=1000&q=80",
+        "details": "This is Really a Nice Room.It has AC personal pool and all the mordern facilites "
+    },
+    {
+        "_id": "0282e0e5fasdfaf13238a5c404fbd15261f11c2ab6a",
+        "rating": {
+            "number": 4.5,
+            "badge": "Excellent"
+        },
+        "price": 80,
+        "pepople": "1-2",
+        "title": "Luxury Room",
+        "image_url": "https://publish.purewow.net/wp-content/uploads/sites/2/2019/08/grand-velas.jpeg?fit=1360%2C906",
+        "details": "This is Really a Nice Room.It has AC personal pool and all the mordern facilites "
+    },
+    {
+        "_id": "0282e0e58afasd3123fa5c404fbd15261f11c2ab6a",
+        "rating": {
+            "number": 4.5,
+            "badge": "Excellent"
+        },
+        "price": 110,
+        "title": "Luxury Room",
+        "pepople": "1-2",
+        "image_url": "https://i.pinimg.com/originals/ed/cf/be/edcfbedcb31471868e328307889cfd16.jpg",
+        "details": "This is Really a Nice Room.It has AC personal pool and all the mordern facilites "
+    },
+    {
+        "_id": "0282e0e58afas132dfadf5c404fbd15261f11c2ab6a",
+        "rating": {
+            "number": 4.5,
+            "badge": "Excellent"
+        },
+        "price": 150,
+        "title": "Luxury Room",
+        "pepople": "1-4",
+        "image_url": "https://cf.bstatic.com/images/hotel/max1024x768/330/33024482.jpg",
+        "details": "This is Really a Nice Room.It has AC personal pool and all the mordern facilites "
+    },
+    {
+        "_id": "0282e0e5fasdfa31231sdfa8a5c404fbd15261f11c2ab6a",
+        "rating": {
+            "number": 4.5,
+            "badge": "Excellent"
+        },
+        "price": 400,
+        "title": "Luxury Room",
+        "pepople": "1-3",
+        "image_url": "https://content.r9cdn.net/res/images/horizon/ui/seoCommon/destinationtiles/seo_hotels.jpg?v=aeb8c67f83d5b9fd53ca97055fc8402800bf3ce4&cluster=4",
+        "details": "This is Really a Nice Room.It has AC personal pool and all the mordern facilites "
+    },
+    {
+        "_id": "0282e0e358a5c404fasdfasbd15261f11c2ab6a",
+        "rating": {
+            "number": 4.5,
+            "badge": "Excellent"
+        },
+        "price": 290,
+        "pepople": "1-2",
+        "title": "Luxury Room",
+        "image_url": "https://content.r9cdn.net/res/images/horizon/ui/seoCommon/destinationtiles/seo_hotels.jpg?v=aeb8c67f83d5b9fd53ca97055fc8402800bf3ce4&cluster=4",
+        "details": "This is Really a Nice Room.It has AC personal pool and all the mordern facilites "
+    }
+]
