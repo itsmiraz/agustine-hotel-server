@@ -3,7 +3,8 @@ const express = require('express')
 const jwt = require('jsonwebtoken');
 const app = express()
 const port = 5000
-var cors = require('cors')
+var cors = require('cors');
+const { query } = require('express');
 require('dotenv').config()
 app.use(cors())
 app.use(express.json())
@@ -16,10 +17,11 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@clu
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 
+
 function verifyJWT(req, res, next) {
     const authHeader = req.headers.authorization;
     if (!authHeader) {
-        return res.status(401).send({ message: 'Unathorized Access' })
+        return res.status(401).send({ message: 'Unathorized aaaaaAccess' })
     }
     const token = authHeader.split(' ')[1];
 
@@ -39,17 +41,108 @@ async function run() {
     try {
         const roomCollection = client.db('agustineRooms').collection('rooms')
         const orderCollection = client.db('agustineOrders').collection('orders')
+        const usersCollection = client.db('agustineOrders').collection('users')
 
+
+        // verify admin
+        const verifyAdmin = async (req, res, next) => {
+            const decodedEmail = req.decoded.email;
+            console.log(decodedEmail);
+            const query = { email: decodedEmail };
+            const user = await usersCollection.findOne(query);
+            if (user?.role !== "admin") {
+              res.status(403).send({ message: "Forbiddn Access" });
+            }
+            next();
+          };
 
         // JWT Token API
 
 
-        app.post('/jwt', (req, res) => {
-            const user = req.body;
-            const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10h' })
-            res.send({ token })
+        // app.post('/jwt', (req, res) => {
+        //     const user = req.body;
+        //     const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10h' })
+        //     res.send({ token })
+        // })
+
+
+        //  ------------User Api -----------
+
+
+        app.put("/user/:email", async (req, res) => {
+            try {
+                const email = req.params.email;
+                console.log(email)
+
+
+                console.log(email)
+                // check the req
+                console.log(req.body);
+                const user = req.body;
+                const filter = { email: email };
+                const options = { upsert: true };
+                const updateDoc = {
+                    $set: user
+                }
+                const result = await usersCollection.updateOne(filter, updateDoc, options);
+
+                // token generate 
+                const token = jwt.sign(
+                    { email: email },
+                    process.env.ACCESS_TOKEN_SECRET,
+                    { expiresIn: "1d" }
+                )
+                res.send({
+                    status: "success",
+                    message: "Token Created Successfully",
+                    data: token
+                })
+
+
+            }
+            catch (err) {
+                console.log(err)
+            }
         })
 
+
+        app.get('/user',verifyJWT, async (req, res) => {
+            const query = {}
+            const result = await usersCollection.find(query).toArray()
+            res.send(result)
+        })
+
+
+        // ------ Admin API =--------
+        app.put('/user/admin/:id', verifyJWT, async (req, res) => {
+            
+            const decodedEmail = req.decoded.email;
+            const query = { email: decodedEmail };
+            const user = await usersCollection.findOne(query);
+            if (user?.role === 'admin') {
+                res.status(403).send({ message: "Forbiddn Access" });
+            }
+
+            const id = req.params.id;
+            const filter = { _id: ObjectId(id) }
+            const option = { upsert: true };
+            const updateDoc = {
+                $set: {
+                    role: 'admin'
+                }
+            }
+            const result = await usersCollection.updateOne(filter, updateDoc, option)
+            res.send(result)
+        })
+
+
+        // Verify Admin email
+        app.get("/user/admin/:email", async (req, res) => {
+            const email = req.params.email;
+            const query = { email };
+            const user = await usersCollection.findOne(query);
+            res.send({ isAdmin: user?.role === "admin" });
+        });
 
         // ----------Client API's-----------
         app.get('/room', async (req, res) => {
@@ -120,7 +213,7 @@ async function run() {
         })
 
         //  ---- get booking by email
-        app.get('/orders', verifyJWT, async (req, res) => {
+        app.get('/bookings', verifyJWT, async (req, res) => {
 
             const decoded = req.decoded;
             if (decoded.email !== req.query.email) {
