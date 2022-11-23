@@ -47,7 +47,6 @@ async function run() {
         // verify admin
         const verifyAdmin = async (req, res, next) => {
             const decodedEmail = req.decoded.email;
-            console.log(decodedEmail);
             const query = { email: decodedEmail };
             const user = await usersCollection.findOne(query);
             if (user?.role !== "admin") {
@@ -56,15 +55,23 @@ async function run() {
             next();
           };
 
-        // JWT Token API
-
-
-        // app.post('/jwt', (req, res) => {
-        //     const user = req.body;
-        //     const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10h' })
-        //     res.send({ token })
-        // })
-
+        //   stripe Api
+        app.post("/create-payment-intent", async (req, res) => {
+            const booking = req.body;
+            // console.log('api hit',req.headers)
+            const price = booking.price;
+            const amount = price * 100;
+      
+            const paymentIntent = await stripe.paymentIntents.create({
+              currency: "usd",
+              amount: amount,
+      
+              "payment_method_types": ["card"],
+            });
+            res.send({
+              clientSecret: paymentIntent.client_secret,
+            });
+          });
 
         //  ------------User Api -----------
 
@@ -72,12 +79,12 @@ async function run() {
         app.put("/user/:email", async (req, res) => {
             try {
                 const email = req.params.email;
-                console.log(email)
+                
 
 
-                console.log(email)
+             
                 // check the req
-                console.log(req.body);
+               
                 const user = req.body;
                 const filter = { email: email };
                 const options = { upsert: true };
@@ -106,7 +113,7 @@ async function run() {
         })
 
 
-        app.get('/user',verifyJWT, async (req, res) => {
+        app.get('/user',verifyJWT,verifyAdmin, async (req, res) => {
             const query = {}
             const result = await usersCollection.find(query).toArray()
             res.send(result)
@@ -165,7 +172,7 @@ async function run() {
         //------------ Admin API's--------------
 
         // create room
-        app.post('/room', async (req, res) => {
+        app.post('/room',verifyJWT,verifyAdmin, async (req, res) => {
             const room = req.body;
 
             const result = await roomCollection.insertOne(room);
